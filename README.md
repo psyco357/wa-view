@@ -1,36 +1,95 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# WA View
 
-## Getting Started
+Frontend dashboard untuk pengelolaan data kendaraan, broadcast WhatsApp, chat, import/export, dan laporan.
 
-First, run the development server:
+## Teknologi
+
+- Next.js 16 (Turbopack)
+- React 19
+- TypeScript
+- Tailwind CSS
+- React Query
+
+## Prasyarat
+
+- Node.js 20+ (disarankan LTS terbaru)
+- npm 10+
+
+## Instalasi
+
+1. Clone repository.
+2. Masuk ke folder project.
+3. Install dependency.
+
+```bash
+npm install
+```
+
+## Konfigurasi Environment
+
+Buat file `.env.local` lalu isi variabel berikut:
+
+```env
+NEXT_PUBLIC_BASE_API=http://103.6.54.230:3502/api
+NEXT_PUBLIC_WS_URL=http://103.6.54.230:3502
+```
+
+Catatan:
+- `NEXT_PUBLIC_BASE_API` dipakai untuk request API utama.
+- `NEXT_PUBLIC_WS_URL` dipakai untuk koneksi WebSocket/real-time update.
+
+## Menjalankan Aplikasi
+
+### Mode Development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Lalu buka:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+http://localhost:3000
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Build Production
 
-## Learn More
+```bash
+npm run build
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Jalankan Hasil Build
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Lint
 
-## Deploy on Vercel
+```bash
+npm run lint
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Penggunaan Aplikasi
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Akses halaman login.
+2. Login menggunakan akun yang valid dari backend.
+3. Setelah login, user akan diarahkan ke dashboard admin.
+4. Gunakan menu utama untuk:
+	- Dashboard ringkasan data
+	- Daftar kendaraan (filter, pilih data, kirim blast)
+	- Import kendaraan
+	- Chat
+	- Reports
+
+## Struktur Folder Utama
+
+- `app/` route App Router (termasuk layout dan page utama)
+- `pages/` komponen halaman legacy/internal modules
+- `components/` komponen UI dan context
+- `libs/services/` layer API service
+- `libs/hooks/` custom hook aplikasi
+- `libs/types/` type/interface TypeScript
+
+## Catatan Tambahan
+
+- Project menggunakan proteksi route berbasis `proxy.ts`.
+- Token autentikasi disimpan saat login, lalu otomatis digunakan untuk request API yang membutuhkan otorisasi.
