@@ -4,14 +4,14 @@ import LoginForm from '@/kiwi/auth/LoginForm';
 import AppAuth from '@/components/layouts/AppAuth';
 
 export const metadata: Metadata = {
-  title: 'Login - Wablast',
-  description: 'Masuk ke akun Wablast Anda',
+    title: 'Login - Koperasi SUKA RESIK',
+    description: 'Masuk ke akun koperasi Anda',
 };
 
 export default function LoginPage() {
-  return (
-    <AppAuth title="Login" subtitle="Masuk ke akun Wablast Anda">
-      <LoginForm />
-    </AppAuth>
-  );
+    return (
+        <AppAuth title="Login" subtitle="Masuk ke akun koperasi Anda">
+            <LoginForm />
+        </AppAuth>
+    );
 }
