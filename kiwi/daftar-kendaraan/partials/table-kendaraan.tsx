@@ -34,6 +34,7 @@ type TableKendaraanProps = {
     handleKirimBlast: () => void;
     isAllSelected: boolean;
     isSomeSelected: boolean;
+    getPaginationPages: (currentPage: number, lastPage: number) => (number | string)[];
 };
 
 export default function TableKendaraan({
@@ -58,6 +59,7 @@ export default function TableKendaraan({
     handleKirimBlast,
     isAllSelected,
     isSomeSelected,
+    getPaginationPages,
 }: TableKendaraanProps) {
     const columns = getKendaraanColumns({
         selectedRowIds,
@@ -267,48 +269,57 @@ export default function TableKendaraan({
                         </table>
                     </div>
 
-                    {!isLoading && !isError && pagination && pagination.last_page > 1 && (
-                        <div className="flex flex-col gap-3 border-t border-gray-200 px-4 py-3 dark:border-gray-800 md:flex-row md:items-center md:justify-between">
-                            <div className="text-sm text-gray-500 dark:text-gray-400">
-                                Halaman {pagination.current_page} dari {pagination.last_page}
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <button
-                                    type="button"
-                                    onClick={() => setPage((pagination.current_page ?? 1) - 1)}
-                                    disabled={!pagination.prev_page_url || isFetching}
-                                    className="rounded-lg border border-gray-200 px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800"
-                                >
-                                    Sebelumnya
-                                </button>
+                   {!isLoading && !isError && pagination && pagination.last_page > 1 && (
+    <div className="flex flex-col gap-3 border-t border-gray-200 px-4 py-3 dark:border-gray-800 md:flex-row md:items-center md:justify-between">
+        <div className="text-sm text-gray-500 dark:text-gray-400">
+            Halaman {pagination.current_page} dari {pagination.last_page}
+        </div>
+        <div className="flex items-center gap-2">
+            <button
+                type="button"
+                onClick={() => setPage((pagination.current_page ?? 1) - 1)}
+                disabled={!pagination.prev_page_url || isFetching}
+                className="rounded-lg border border-gray-200 px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800"
+            >
+                Sebelumnya
+            </button>
 
-                                <div className="flex items-center gap-1">
-                                    {Array.from({ length: pagination.last_page }, (_, index) => index + 1).map((pageNumber) => (
-                                        <button
-                                            key={pageNumber}
-                                            type="button"
-                                            onClick={() => setPage(pageNumber)}
-                                            disabled={isFetching}
-                                            className={`min-w-10 rounded-lg px-3 py-2 text-sm font-medium transition ${pagination.current_page === pageNumber
-                                                ? "bg-gray-900 text-white dark:bg-white dark:text-gray-900"
-                                                : "border border-gray-200 text-gray-700 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800"}`}
-                                        >
-                                            {pageNumber}
-                                        </button>
-                                    ))}
-                                </div>
+            <div className="flex items-center gap-1">
+                {getPaginationPages(pagination.current_page, pagination.last_page).map((page, index) => (
+                    <React.Fragment key={index}>
+                        {page === '...' ? (
+                            <span className="px-3 py-2 text-sm text-gray-500 dark:text-gray-400">
+                                ...
+                            </span>
+                        ) : (
+                            <button
+                                type="button"
+                                onClick={() => setPage(page as number)}
+                                disabled={isFetching}
+                                className={`min-w-10 rounded-lg px-3 py-2 text-sm font-medium transition ${
+                                    pagination.current_page === page
+                                        ? "bg-gray-900 text-white dark:bg-white dark:text-gray-900"
+                                        : "border border-gray-200 text-gray-700 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800"
+                                }`}
+                            >
+                                {page}
+                            </button>
+                        )}
+                    </React.Fragment>
+                ))}
+            </div>
 
-                                <button
-                                    type="button"
-                                    onClick={() => setPage((pagination.current_page ?? 1) + 1)}
-                                    disabled={!pagination.next_page_url || isFetching}
-                                    className="rounded-lg border border-gray-200 px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800"
-                                >
-                                    Berikutnya
-                                </button>
-                            </div>
-                        </div>
-                    )}
+            <button
+                type="button"
+                onClick={() => setPage((pagination.current_page ?? 1) + 1)}
+                disabled={!pagination.next_page_url || isFetching}
+                className="rounded-lg border border-gray-200 px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800"
+            >
+                Berikutnya
+            </button>
+        </div>
+    </div>
+)}
                 </div>
             </section>
         </div>

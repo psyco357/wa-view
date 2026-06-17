@@ -47,7 +47,7 @@ class KendaraanService extends BaseService {
     });
     const result =
       await this.parseResult<PaginationResponse<Kendaraan>>(response);
-
+// console.log("Fetched kendaraan data:", result);
     return result.data;
   }
 
