@@ -43,6 +43,7 @@ class AuthService {
    * Endpoint: POST /v1/auth/login/sanctum
    */
   async login(payload: LoginPayload): Promise<AuthResponse> {
+    console.log('Logging in with payload:', payload);
     const response = await fetch(`${this.baseApi}/v1/auth/login/sanctum`, {
       method: 'POST',
       headers: {

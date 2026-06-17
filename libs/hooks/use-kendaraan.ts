@@ -42,8 +42,10 @@ export default function useKendaraan() {
       search: params.search,
       start_date: params.start_date,
       end_date: params.end_date,
+      status_broadcast: params.status_broadcast, // Tambahkan
+      jenis_roda: params.jenis_roda,    
     }),
-    [params.page, params.per_page, params.search, params.start_date, params.end_date],
+    [params.page, params.per_page, params.search, params.start_date, params.end_date, params.status_broadcast, params.jenis_roda],
   );
 
   const kendaraanQuery = useQuery({
@@ -56,28 +58,28 @@ export default function useKendaraan() {
     setSelectedRowIds([]);
   }, [params]);
 
-  const kendaraanData = useMemo(() => {
-    const rows = kendaraanQuery.data?.data ?? [];
+  // const kendaraanData = useMemo(() => {
+  //   const rows = kendaraanQuery.data?.data ?? [];
 
-    return rows.filter((item) => {
-      const matchesStatus =
-        !params.status_broadcast ||
-        params.status_broadcast === "all" ||
-        item.status_broadcast === params.status_broadcast;
+  //   return rows.filter((item) => {
+  //     const matchesStatus =
+  //       !params.status_broadcast ||
+  //       params.status_broadcast === "all" ||
+  //       item.status_broadcast === params.status_broadcast;
 
-      const matchesJenisRoda =
-        !params.jenis_roda ||
-        params.jenis_roda === "all" ||
-        item.jenis_roda === params.jenis_roda;
+  //     const matchesJenisRoda =
+  //       !params.jenis_roda ||
+  //       params.jenis_roda === "all" ||
+  //       item.jenis_roda === params.jenis_roda;
 
-      return matchesStatus && matchesJenisRoda;
-    });
-  }, [
-    kendaraanQuery.data?.data,
-    params.jenis_roda,
-    params.status_broadcast,
-  ]);
-
+  //     return matchesStatus && matchesJenisRoda;
+  //   });
+  // }, [
+  //   kendaraanQuery.data?.data,
+  //   params.jenis_roda,
+  //   params.status_broadcast,
+  // ]);
+  const kendaraanData = kendaraanQuery.data?.data ?? [];
   const selectedRows = useMemo(
     () => kendaraanData.filter((item) => selectedRowIds.includes(item.id)),
     [kendaraanData, selectedRowIds],
@@ -175,6 +177,7 @@ export default function useKendaraan() {
   };
 
   const setStatusBroadcast = (status_broadcast: string) => {
+    console.log("Setting status_broadcast to:", status_broadcast);
     setParams((prev) => ({
       ...prev,
       page: 1,
