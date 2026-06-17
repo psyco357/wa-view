@@ -8,7 +8,7 @@ export interface DashboardData {
   data_terkirim: number;
   data_gagal: number;
   data_berhasil?: number;
-  data_pending: number;
+  data_belum_dikirim: number;
   persentase_terkirim: number;
   total_tagihan: string;
 }
@@ -18,7 +18,7 @@ export interface DashboardSumary {
   dataTerkirim: number;
   dataGagal: number;
   dataBerhasil: number;
-  dataPending: number;
+  dataBelumDikirim: number;
   persentaseTerkirim: number;
   totalTagihan: number;
 }

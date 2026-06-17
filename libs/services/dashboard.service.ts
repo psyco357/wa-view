@@ -18,7 +18,7 @@ class DashboardService extends BaseService {
       dataTerkirim: apiResponse.data.data_terkirim,
       dataGagal: apiResponse.data.data_gagal,
       dataBerhasil: apiResponse.data.data_berhasil ?? 0,
-      dataPending: apiResponse.data.data_pending,
+      dataBelumDikirim: apiResponse.data.data_belum_dikirim,
       persentaseTerkirim: apiResponse.data.persentase_terkirim,
       totalTagihan: Number(apiResponse.data.total_tagihan),
     };
