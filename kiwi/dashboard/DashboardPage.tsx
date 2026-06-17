@@ -53,7 +53,7 @@ export default function DashboardPage() {
             <IoMdCheckmarkCircleOutline width="28" height="28" className="h-7 w-7 text-green-500" />
           </div>
           <div>
-            <h3 className="text-2xl font-semibold text-gray-800 dark:text-white/90">{dashboard?.dataBerhasil}</h3>
+            <h3 className="text-2xl font-semibold text-gray-800 dark:text-white/90">{dashboard?.dataTerkirim}</h3>
             <p className="flex items-center gap-3 text-gray-500 dark:text-gray-400">Data Terkirim
             </p>
           </div>
@@ -73,8 +73,8 @@ export default function DashboardPage() {
             <LuClockAlert width="28" height="28" className="h-7 w-7 text-yellow-500" />
           </div>
           <div>
-            <h3 className="text-2xl font-semibold text-gray-800 dark:text-white/90">{dashboard?.dataPending}</h3>
-            <p className="flex items-center gap-3 text-gray-500 dark:text-gray-400">Data Pending
+            <h3 className="text-2xl font-semibold text-gray-800 dark:text-white/90">{dashboard?.dataBelumDikirim}</h3>
+            <p className="flex items-center gap-3 text-gray-500 dark:text-gray-400">Belum Dikirim
             </p>
           </div>
         </article>
@@ -87,7 +87,7 @@ export default function DashboardPage() {
           </svg>
           Total Tagihan
         </h3>
-        <div className="mt-6 text-3xl font-bold text-gray-800 dark:text-white/90" style={{ transform: "none" }}>Rp&nbsp;{dashboard?.totalTagihan}</div>
+        <div className="mt-6 text-3xl font-bold text-gray-800 dark:text-white/90" style={{ transform: "none" }}>Rp&nbsp;{dashboard?.totalTagihan?.toLocaleString('id-ID')}</div>
         <div className="mt-6 space-y-4">
           <div className="space-y-2">
             <div className="flex justify-between text-sm">
