@@ -116,9 +116,10 @@ export default function TableKendaraan({
                         >
                             <option value="all">Semua status</option>
                             <option value="belum_dikirim">Belum dikirim</option>
-                            <option value="pending">Pending</option>
+                            <option value="sedang_dikirim">Pending</option>
                             <option value="gagal">Gagal</option>
-                            <option value="berhasil">Berhasil</option>
+                            <option value="terkirim">Berhasil</option>
+                            <option value="dibaca">Dibaca</option>
                         </select>
                     </label>
                     <label className="flex flex-col gap-1 text-sm text-gray-600 dark:text-gray-300">
