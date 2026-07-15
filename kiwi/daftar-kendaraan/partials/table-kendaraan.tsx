@@ -10,7 +10,7 @@ import React from "react";
 import { parseISO } from "date-fns";
 
 const loadingRows = Array.from({ length: 5 }, (_, index) => index);
-const perPageOptions = [5, 10, 15, 25, 50];
+const perPageOptions = [10,100,500,1000,5000,10000];
 
 type TableKendaraanProps = {
     openForm: (mode: FormMode) => void;
